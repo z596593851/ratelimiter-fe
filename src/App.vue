@@ -1,32 +1,48 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div>
+    <el-header style="background-color: gray">
+      我是表头
+    </el-header>
+    <el-container>
+      <el-aside width="200px">
+        <Aside/>
+      </el-aside>
+      <el-container>
+        <el-main>
+          <router-view />
+        </el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
+<script>
+  // 导入组件
+  import Aside from "@/views/Aside.vue";
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  export default {
+    name: "layout",
+    components: {
+      Aside
+    },
+    data() {
+      return { isCollapse: true, asWidth: "100" };
+    },
+    methods: {
+      menu() {
+        this.isCollapse = !this.isCollapse;
+      },
+      logout() {
+        this.$router.push("/");
+      }
     }
+  };
+</script>
+<style lang="scss" scoped>
+  .menu {
+    margin-top: 10px;
+    text-align: left;
   }
-}
+  .menu.logout {
+    text-align: right;
+  }
 </style>
